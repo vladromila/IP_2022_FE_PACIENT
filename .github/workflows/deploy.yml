@@ -14,4 +14,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD}}
-          script: cd /var/www/html/IP_2022_FE_PACIENT/ && sudo git pull origin master && sudo npm install && sudo npm run build
+          script: cd /var/www/html/IP_2022_FE_PACIENT/ && sudo git pull origin master && sudo npm install --force && sudo npm run build

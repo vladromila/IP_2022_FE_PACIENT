@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -13,4 +14,24 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+div.audio-react-recorder {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+div.audio-react-recorder canvas {
+  max-width: 100%;
+}
+
+.centered-text {
+  position: absolute;
+  z-index: -1;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }
