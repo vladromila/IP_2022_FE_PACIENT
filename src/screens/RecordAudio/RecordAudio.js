@@ -26,6 +26,21 @@ let RecordAudio = () => {
         changeRecordedAudios([...recordedAudios, audioData]);
     }
 
+    const [isBlocked, setIsBlocked] = React.useState(false);
+
+    React.useEffect(() => {
+        navigator.getUserMedia(
+            { audio: true },
+            () => {
+                console.log('Access granted.');
+                setIsBlocked(false);
+            },
+            () => {
+                console.log('Access denied.');
+                setIsBlocked(true);
+            });
+    }, [isBlocked]);
+
     return <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 direction-col flex flex-col">
         <div className="flex jutify-center flex-col items-center">
             <div className="relative">
