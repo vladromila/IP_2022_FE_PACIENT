@@ -4,11 +4,13 @@ import Nav from "./components/Nav/Nav"
 import { PrivateRoute } from "./components/Routing/PrivateRoute"
 import RecordAudio from "./screens/RecordAudio/RecordAudio"
 import UserProfile from "./screens/UserProfile/UserProfile"
+import AuthScreen from "./screens/AuthScreen/AuthScreen"
 function App() {
   return (
     <div>
       <Nav />
       <Routes>
+        <Route path="/auth" element={<AuthScreen />} />
         <Route exact path='/' element={<PrivateRoute />}>
           <Route exact path='/' element={<HomeScreen />} />
         </Route>
