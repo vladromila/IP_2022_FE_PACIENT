@@ -4,8 +4,7 @@ import { Navigate } from 'react-router-dom';
 let AuthScreen = () => {
     React.useEffect(() => {
         let userData = '{"' + decodeURI(window.location.search.substring(1).replace(/&/g, "\",\"").replace(/=/g, "\":\"")) + '"}'
-        console.log(userData);
-        localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("userData", userData);
         channgeRedirect(true);
     }, [])
 
