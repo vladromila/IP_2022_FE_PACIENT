@@ -40,6 +40,7 @@ let UserProfile = () => {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+        localStorage.setItem("userData", JSON.stringify(currentData));
     }
     return <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 direction-col flex flex-col">
         <div className="grid grid-cols-1 gap-6 mt-6">
