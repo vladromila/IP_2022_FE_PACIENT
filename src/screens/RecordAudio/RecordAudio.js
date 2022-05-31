@@ -38,9 +38,16 @@ let RecordAudio = () => {
             recordState: RecordState.STOP
         })
     }
+    function blobToFile(theBlob, fileName) {
+        //A Blob() is almost a File() - it's just missing the two properties below which we will add
+        theBlob.lastModifiedDate = new Date();
+        theBlob.name = fileName;
+        return theBlob;
+    }
 
     let onStop = (audioData) => {
-        changeRecordedAudios([...recordedAudios, audioData]);
+        let file = blobToFile(audioData.url, new Date().toISOString);
+        changeRecordedAudios([...recordedAudios, file]);
     }
     let renderFileInputs = () => {
         let f = [0, 1, 2, 3];
