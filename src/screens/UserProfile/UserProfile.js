@@ -12,7 +12,7 @@ let UserProfile = () => {
         return finalDate
     }
     let onSaveProfile = () => {
-        let currentData = JSON.parse(localStorage.userData);
+        let currentData = { ...userData };
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.userData).token}`);
         myHeaders.append("Content-Type", "application/json");
