@@ -86,7 +86,6 @@ let RecordAudio = () => {
 
         const headers = {
             "Authorization": `Bearer ${JSON.parse(localStorage.userData).token}`,
-            "Content-Type": "multipart/form-data",
             "Accept": "application/json",
         };
 
