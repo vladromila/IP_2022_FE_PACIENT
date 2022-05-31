@@ -80,6 +80,7 @@ let RecordAudio = () => {
     let { id } = useParams();
 
     let onSaveAudios = () => {
+        console.log(recordedAudios);
         const url = new URL(
             "https://api.fiihealth.ro/api/recordings"
         );
