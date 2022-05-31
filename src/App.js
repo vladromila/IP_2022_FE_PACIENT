@@ -18,6 +18,9 @@ function App() {
         <Route exact path='/requestdiagnosis' element={<PrivateRoute />}>
           <Route exact path='/requestdiagnosis' element={<RequestDiagnosis />} />
         </Route>
+        <Route exact path='/recordaudio/:id' element={<PrivateRoute />}>
+          <Route exact path='/recordaudio/:id' element={<RecordAudio />} />
+        </Route>
         <Route exact path='/profile' element={<PrivateRoute />}>
           <Route exact path='/profile' element={<UserProfile />} />
         </Route>

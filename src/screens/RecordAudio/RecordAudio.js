@@ -1,17 +1,34 @@
 import React from 'react';
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
+import { useParams } from 'react-router';
+
+let timer = null;
 
 let RecordAudio = () => {
     let [state, changeState] = React.useState({ recordState: null, });
     let [recordedAudios, changeRecordedAudios] = React.useState([]);
-
+    let [startDate, changeStartDate] = React.useState(null);
+    let [currentLength, changeCurrentLength] = React.useState(0);
     let start = () => {
-        changeState({
-            recordState: RecordState.START
-        })
+        if (recordedAudios.length == 4)
+            alert("You can not add more than 4 recordings!");
+        else {
+            changeStartDate(new Date());
+            timer = setTimeout(() => {
+                stop();
+                changeCurrentLength(0);
+                changeStartDate(null);
+            }, (20 - currentLength) * 1000)
+            changeState({
+                recordState: RecordState.START
+            })
+        }
     }
 
     let pause = () => {
+        clearTimeout(timer);
+        let secondsDifference = (new Date().getTime() - startDate.getTime()) / 1000;
+        changeCurrentLength(secondsDifference);
         changeState({
             recordState: RecordState.PAUSE
         })
@@ -25,9 +42,68 @@ let RecordAudio = () => {
     let onStop = (audioData) => {
         changeRecordedAudios([...recordedAudios, audioData]);
     }
+    let renderFileInputs = () => {
+        let f = [0, 1, 2, 3];
+        recordedAudios.forEach(audio => {
+            f.pop();
+        })
+        return f.map((item, ind) => {
+            return <div class="mb-3 w-96" key={ind + recordedAudios.length}>
+                <input accept='audio/wav' onChange={e => {
+                    if (e.target.files.length) {
+                        let file = e.target.files[0];
+                        file.url = URL.createObjectURL(file)
+                        changeRecordedAudios([...recordedAudios, file]);
+                    }
+                    console.log(e.target.files[0]);
+                }} class="form-control
+                    mt-4
+    block
+    w-full
+    px-3
+    py-1.5
+    text-base
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding
+    border border-solid border-gray-300
+    rounded
+    transition
+    ease-in-out
+    m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile" />
+            </div>
+        })
 
+    }
     const [isBlocked, setIsBlocked] = React.useState(false);
+    let { id } = useParams();
 
+    let onSaveAudios = () => {
+        const url = new URL(
+            "http://api.fiihealth.ro/api/recordings"
+        );
+
+        const headers = {
+            "Authorization": `Bearer ${JSON.parse(localStorage.userData).token}`,
+            "Content-Type": "multipart/form-data",
+            "Accept": "application/json",
+        };
+
+        const body = new FormData();
+        body.append('form_id', '1');
+        body.append('type', 'shallow_cough');
+        body.append('file', recordedAudios[0]);
+
+        fetch(url, {
+            method: "POST",
+            headers,
+            body,
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
 
 
     return <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 direction-col flex flex-col">
@@ -63,9 +139,15 @@ let RecordAudio = () => {
                 <React.Fragment>
                     <h3 className="text-3xl font-semibold mb-5 mt-5">Recorded Audios:</h3>
                     {recordedAudios.map((audio, key) => {
-                        return <audio className='lg:w-1/2' key={key} controls src={audio.url} />
+                        return <audio className='lg:w-1/2 mt-4' key={key} controls src={audio.url} />
                     })}
                 </React.Fragment> : null}
+            <div class="flex justify-center flex-col">
+                {renderFileInputs()}
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  mb-12 disable" onClick={onSaveAudios}>
+                Add Audio Data
+            </button>
         </div>
     </div>
 }
