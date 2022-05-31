@@ -5,6 +5,7 @@ import { PrivateRoute } from "./components/Routing/PrivateRoute"
 import RecordAudio from "./screens/RecordAudio/RecordAudio"
 import UserProfile from "./screens/UserProfile/UserProfile"
 import AuthScreen from "./screens/AuthScreen/AuthScreen"
+import RequestDiagnosis from "./screens/RequestDiagnosis/RequestDiagnosis"
 function App() {
   return (
     <div>
@@ -14,8 +15,8 @@ function App() {
         <Route exact path='/' element={<PrivateRoute />}>
           <Route exact path='/' element={<HomeScreen />} />
         </Route>
-        <Route exact path='/recordaudio' element={<PrivateRoute />}>
-          <Route exact path='/recordaudio' element={<RecordAudio />} />
+        <Route exact path='/requestdiagnosis' element={<PrivateRoute />}>
+          <Route exact path='/requestdiagnosis' element={<RequestDiagnosis />} />
         </Route>
         <Route exact path='/profile' element={<PrivateRoute />}>
           <Route exact path='/profile' element={<UserProfile />} />
