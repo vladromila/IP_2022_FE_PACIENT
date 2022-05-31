@@ -3,7 +3,7 @@ import React from 'react';
 let RequestDiagnosis = () => {
     let onRequestDiagnosisPress = () => {
         const url = new URL(
-            "http://localhost/api/forms"
+            "https://api.fiihealth.ro/api/forms"
         );
 
         const headers = {
