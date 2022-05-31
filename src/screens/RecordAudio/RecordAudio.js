@@ -90,7 +90,7 @@ let RecordAudio = () => {
             "Accept": "application/json",
         };
 
-        const body = new FormData();
+        let body = new FormData();
         body.append('form_id', '1');
         body.append('type', 'shallow_cough');
         body.append('file', recordedAudios[0]);
