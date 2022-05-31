@@ -51,6 +51,8 @@ let HomeScreen = () => {
                 <p class="font-normal text-gray-700 dark:text-gray-400">Conditions: {req.conditions}</p>
                 <p class="font-normal text-gray-700 dark:text-gray-400">Pre_existing_conditions: {req.pre_existing_conditions}</p>
                 <p class="font-normal text-gray-700 dark:text-gray-400">Ailments: {req.ailments}</p>
+                <p class="font-normal text-white font-bold ">Result: {req.result}</p>
+
 
             </div>
         })
