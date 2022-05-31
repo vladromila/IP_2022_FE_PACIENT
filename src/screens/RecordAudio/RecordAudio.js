@@ -45,6 +45,7 @@ let RecordAudio = () => {
 
     let onStop = (audioData) => {
         let file = blobToFile(audioData.blob, new Date().toISOString);
+        file.url = audioData.url;
         changeRecordedAudios([...recordedAudios, file]);
     }
     let renderFileInputs = () => {
