@@ -95,6 +95,8 @@ let RecordAudio = () => {
         body.append('type', 'shallow_cough');
         body.append('file', recordedAudios[0]);
 
+        console.log(body);
+
         fetch(url, {
             method: "POST",
             headers,
