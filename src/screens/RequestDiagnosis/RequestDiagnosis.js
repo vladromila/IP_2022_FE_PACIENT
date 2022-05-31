@@ -31,7 +31,10 @@ let RequestDiagnosis = () => {
             method: "GET",
             headers,
             // body: JSON.stringify(body),
-        }).then(response => response.json());
+        }).then(response => response.json())
+            .then(res => {
+                console.log(res);
+            })
     }
     return <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  mb-12 disable" onClick={onRequestDiagnosisPress}>
         Save Profile
