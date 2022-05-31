@@ -28,9 +28,9 @@ let RequestDiagnosis = () => {
         };
 
         fetch(url, {
-            method: "POST",
+            method: "GET",
             headers,
-            body: JSON.stringify(body),
+            // body: JSON.stringify(body),
         }).then(response => response.json());
     }
     return <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  mb-12 disable" onClick={onRequestDiagnosisPress}>
