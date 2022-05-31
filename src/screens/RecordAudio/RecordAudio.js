@@ -100,7 +100,7 @@ let RecordAudio = () => {
 
         let body = new FormData();
         body.append('form_id', '1');
-        body.append('type', 'shallow_cough');
+        body.append('type', 'cough');
         body.append('file', recordedAudios[0]);
 
         console.log(body);
