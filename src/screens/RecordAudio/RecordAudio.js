@@ -81,7 +81,7 @@ let RecordAudio = () => {
 
     let onSaveAudios = () => {
         const url = new URL(
-            "http://api.fiihealth.ro/api/recordings"
+            "https://api.fiihealth.ro/api/recordings"
         );
 
         const headers = {
