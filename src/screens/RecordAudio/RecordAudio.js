@@ -51,11 +51,13 @@ let RecordAudio = () => {
     }
     let renderFileInputs = () => {
         let f = [0, 1, 2, 3];
-        recordedAudios.forEach(audio => {
-            f.pop();
-        })
+        // recordedAudios.forEach(audio => {
+        //     f.pop();
+        // })
         return f.map((item, ind) => {
-            return <div class="mb-3 w-96" key={ind + recordedAudios.length}>
+            return <div class="mb-3 w-96" key={ind
+                //  + recordedAudios.length
+            }>
                 <input accept='audio/wav' onChange={e => {
                     if (e.target.files.length) {
                         let file = e.target.files[0];
