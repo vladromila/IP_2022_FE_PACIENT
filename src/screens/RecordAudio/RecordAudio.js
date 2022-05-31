@@ -46,7 +46,7 @@ let RecordAudio = () => {
     }
 
     let onStop = (audioData) => {
-        let file = blobToFile(audioData.url, new Date().toISOString);
+        let file = blobToFile(audioData.blob, new Date().toISOString);
         changeRecordedAudios([...recordedAudios, file]);
     }
     let renderFileInputs = () => {
@@ -80,7 +80,7 @@ let RecordAudio = () => {
     transition
     ease-in-out
     m-0
-    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile" />
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" />
             </div>
         })
 
