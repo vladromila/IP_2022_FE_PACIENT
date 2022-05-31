@@ -36,7 +36,7 @@ let UserProfile = () => {
             redirect: 'follow'
         };
 
-        fetch("https://api.fiihealth.ro/api/patients/" + JSON.parse(localStorage.userData).user_id, requestOptions)
+        fetch("https://api.fiihealth.ro/api/patients/" + JSON.parse(localStorage.userData).id, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
