@@ -111,7 +111,7 @@ let RequestDiagnosis = () => {
                 return false;
             }}>
                 <div className="flex justify-start flex-col items-start">
-                    <div>
+                    <div className='pt-8'>
                         {/* first form */}
                         <span className="text-black font-bold">Metadata</span>
 

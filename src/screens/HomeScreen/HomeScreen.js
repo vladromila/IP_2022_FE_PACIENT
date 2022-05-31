@@ -43,11 +43,15 @@ let HomeScreen = () => {
 
     let renderRequests = () => {
         return requests.map(req => {
-            return <div class="block p-6 max-w-md bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mt-4">
+            return <div class="w-full block p-6 max-w-md bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mt-4">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white self-center">Diagnosis Request #{req.id}</h5>
                 <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white self-center">{formatDate(new Date(req.created_at))}</h6>
 
                 <p class="font-normal text-gray-700 dark:text-gray-400">Symptoms: {req.symptoms}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Conditions: {req.conditions}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Pre_existing_conditions: {req.pre_existing_conditions}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Ailments: {req.ailments}</p>
+
             </div>
         })
     }

@@ -16,8 +16,6 @@ let RecordAudio = () => {
             changeStartDate(new Date());
             timer = setTimeout(() => {
                 stop();
-                changeCurrentLength(0);
-                changeStartDate(null);
             }, (20 - currentLength) * 1000)
             changeState({
                 recordState: RecordState.START
@@ -34,18 +32,23 @@ let RecordAudio = () => {
         })
     }
     let stop = () => {
+        changeCurrentLength(0);
+        changeStartDate(null)
+
         changeState({
             recordState: RecordState.STOP
         })
     }
     function blobToFile(theBlob, fileName) {
-        //A Blob() is almost a File() - it's just missing the two properties below which we will add
-        return new File([theBlob], fileName + Math.floor(Math.random() * 10000) + ".wav", { type: "audio/wav", lastModified: new Date().getTime() })
+        return new File([theBlob], "file.wav")
     }
 
     let onStop = (audioData) => {
+        if (timer)
+            clearTimeout(timer);
         let file = blobToFile(audioData.blob, new Date().toISOString);
         file.url = audioData.url;
+        file.isFromRecord = true;
         changeRecordedAudios([...recordedAudios, file]);
     }
     let renderFileInputs = () => {
@@ -98,24 +101,28 @@ let RecordAudio = () => {
             "Accept": "application/json",
         };
         for (let i = 0; i < recordedAudios.length; i++) {
-            let body = new FormData();
-            body.append('form_id', id);
-            body.append('type', 'cough');
-            body.append('file', recordedAudios[i]);
+            if (!recordedAudios[i].isFromRecord) {
+                console.log(recordedAudios[i]);
+                let body = new FormData();
+                body.append('form_id', id);
+                body.append('type', 'cough');
+                body.append('file', recordedAudios[i]);
 
-            console.log(body);
+                console.log(body);
 
-            await fetch(url, {
-                method: "POST",
-                headers,
-                body,
-            }).then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                })
+                await fetch(url, {
+                    method: "POST",
+                    headers,
+                    body,
+                }).then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+            }
         }
-        changeFinishedState(true);
-        console.log("GATA");
+        setTimeout(() => {
+            changeFinishedState(true);
+        }, 5000);
 
     }
 
